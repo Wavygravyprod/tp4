@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1699964190 source:c:\users\nf16a028\desktop\tp4\tp4\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tp4.h"
+
+1699956669 c:\users\nf16a028\desktop\tp4\tp4\tp4.h
+
+1699964169 source:c:\users\nf16a028\desktop\tp4\tp4\tp4.c
+	<stdio.h>
+	<stdlib.h>
+	"tp4.h"
+
