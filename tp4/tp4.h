@@ -31,6 +31,7 @@ typedef T_Noeud* T_Arbre;
 
  //fonction extra
  int compareUV(char* code1, char* code2);
+ char* removeSpace(char* str);
 
 
 #endif // TP4_H_INCLUDED

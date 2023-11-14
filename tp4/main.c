@@ -3,7 +3,7 @@
 #include "tp4.h"
 
 int main() {
-    T_Element* liste = NULL;
+    /* T_Element* liste = NULL;
     liste = ajouterInscription(liste, "NF02");
     liste = ajouterInscription(liste, "NF22");
     liste = ajouterInscription(liste, "AI15");
@@ -14,7 +14,11 @@ int main() {
     while (liste != NULL) {
         printf("%s\n", liste->code_uv);
         liste = liste -> suivant;
-    }
+    } */
+
+    char* str1 = "JEAN BAPTISTE DUPONT DE SAINT MAXENCE";
+    char* str2 = removeSpace(str1);
+    printf("before: %s, after: %s\n", str1, str2);
 
 
 

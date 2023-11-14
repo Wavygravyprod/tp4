@@ -1,7 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "tp4.h"
 
+char* removeSpace(char* str) {
+    char* nstr;
+    int i;
+    for (i = 0; i<strlen(str); ++i) {
+        if (str[i] != " ") nstr = strcat(nstr,str);
+        i++;
+    }
+    return nstr;
+}
 int compareUV(char* code1, char* code2) { // 1 si code1 plus petit 2 sinon, 0 si egal
     int diff = 0;
     int result = 0;
@@ -23,6 +33,20 @@ int compareUV(char* code1, char* code2) { // 1 si code1 plus petit 2 sinon, 0 si
     return(result);
 
 }
+
+/* int compareNoms(char* nom1, char* nom2) {
+    int i = 0;
+    int result = 0;
+    int diff = 0;
+    char* nom1 = removeSpace(char* nom1);
+    while (diff == 0 && i< min(strlen(nom1), strlen(nom2)) {
+
+    }
+
+} */
+
+
+
  T_Element* ajouterInscription(T_Element* liste, char* code) {
     int out = 0;
     int first = 1;
@@ -65,3 +89,17 @@ int compareUV(char* code1, char* code2) { // 1 si code1 plus petit 2 sinon, 0 si
     }
     return liste;
  }
+
+ /* T_Arbre inscrire(T_Arbre abr, char* nom, char* prenom, char* code) {
+     T_Noeud* y = NULL;
+     T_Noeud* x = abr;
+     while (x != NULL) {
+        y = x;
+        if (compareNom(nom , x->nom)== 1) {
+
+        }
+     }
+
+ } */
+
+
