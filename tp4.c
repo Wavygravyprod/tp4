@@ -48,16 +48,16 @@ T_Noeud* rechercheEtu(T_Arbre abr, char* nom, char* prenom) { // DONT KNOW IF I 
     return pt;
 }
 
-T_Noeud* pereMinAbre(T_Arbre abr, T_Noeud* pereArbre) { /* retourne le pere du minimum de l'abre, donc si on veut le min ca sera son fils gauche (c'est utile pour la suppression), 
+T_Noeud* pereMinAbre(T_Arbre abr, T_Noeud* pereArbre) { /* retourne le pere du minimum de l'abre, donc si on veut le min ca sera son fils gauche (c'est utile pour la suppression),
     si le min est le premier noeud de l'abre donc n'a pas de fils gauche, la fonction retourne simplement le pere */
-    T_Noeud* pt = abr;      
+    T_Noeud* pt = abr;
     if (pt == NULL) return NULL;
     if (pt->filsGauche == NULL) return pereArbre;
     pt = pt->filsDroit;
     while (pt->filsGauche->filsGauche != NULL) {
         pt = pt->filsGauche;
     }
-    
+
     return pt;
 }
 
@@ -71,10 +71,10 @@ char* removeSpace(char* str) {
             j++;
         }
     }
-    nstr[++j] = "\0"; 
+    nstr[++j] = "\0";
     return nstr;
 }
-void upperCase(char* str) { 
+void upperCase(char* str) {
     int i = 0;
     while (str[i] != '\0') {
         if (str[i] >= 'a' && str[i] <= 'z') {
@@ -178,7 +178,7 @@ T_Element* ajouterInscription(T_Element* liste, char* code) { // A TESTER
         prec->filsGauche = nvNoeud;
         }
     return abr;
- } 
+ }
 
 T_Arbre chargerFichier(T_Arbre abr, char* filename) {
     char prenom[50];
@@ -195,14 +195,14 @@ T_Arbre chargerFichier(T_Arbre abr, char* filename) {
         i = 0;
         j = 0;
         while (line[i] != ';') {
-            nom[j] = line[i]; 
+            nom[j] = line[i];
             i++;
             j++;
         }
         i++;
        nom[j] = '\0';
        j = 0;
-        
+
         while (line[i] != ';') {
             prenom[j] = line[i];
             j++;
@@ -212,11 +212,11 @@ T_Arbre chargerFichier(T_Arbre abr, char* filename) {
         i++;
        prenom[j] = '\0';
         j = 0;
-        while (line[i] != '\n' && line[i] != '\r' ) { 
+        while (line[i] != '\n' && line[i] != '\r' ) {
             code[j] = line[i];
             j++;
             i++;
-            
+
         }
        // printf("code: %s", code);
        code[j] = '\0';
@@ -226,14 +226,14 @@ T_Arbre chargerFichier(T_Arbre abr, char* filename) {
        upperCase(code);
 
        abr = inscrire(abr, nom, prenom, code);
-       
+
     }
     fclose(ptfile);
     return abr;
 }
 
 void afficherInscriptions(T_Arbre abr) { //parcours infixe pour conserver l'ordre
-    if (abr != NULL){ 
+    if (abr != NULL){
         afficherInscriptions(abr->filsGauche);
         afficherNoeud(abr);
         afficherInscriptions(abr->filsDroit);
@@ -250,7 +250,7 @@ T_Element* supprimerUV(T_Element* liste, char* code) {
         else {
             prec = pt;
             pt = pt->suivant;
-        } 
+        }
     }
     if (found == 0) return liste;
     if (prec == NULL) {
@@ -267,7 +267,7 @@ T_Element* supprimerUV(T_Element* liste, char* code) {
 
 T_Arbre supprimerInscription(T_Arbre abr, char* nom, char* prenom, char* code) {
     T_Noeud* pt;
-    T_Noeud* pere;
+    T_Noeud* pere = NULL;
     int found = 0;
     if (abr == NULL) {
         printf("L'abre est vide, il n'y a rien a supprimer.");
@@ -297,7 +297,7 @@ T_Arbre supprimerInscription(T_Arbre abr, char* nom, char* prenom, char* code) {
 void afficherInscriptionsUV(T_Arbre abr, char* code) {
     T_Element* elt;
     int found = 0;
-    if (abr != NULL){ 
+    if (abr != NULL){
         afficherInscriptionsUV(abr->filsGauche, code);
         elt = abr -> listeInscriptions;
         while (elt != NULL && found == 0) {
@@ -305,10 +305,10 @@ void afficherInscriptionsUV(T_Arbre abr, char* code) {
                 found = 1;
             }
             else {
-                
+
                 elt = elt->suivant;
             }
-            
+
         }
         if (found == 1) printf("nom: %s prenom: %s\n",abr->nom, abr->prenom);
         afficherInscriptionsUV(abr->filsDroit, code);
@@ -326,11 +326,11 @@ T_Arbre supprimerNoeud(T_Arbre abr, T_Noeud* noeudPere, T_Noeud* noeud) {
            return NULL;
         }
         if (noeud == noeudPere->filsDroit) {
-            noeudPere->filsDroit = NULL;                          
+            noeudPere->filsDroit = NULL;
         }
         else noeudPere->filsGauche = NULL;
     }
-    else {      
+    else {
         if (noeud->filsDroit == NULL) {                         // si le neoud a que un fils gauche on attache son fils gauche a son père
            if (noeudPere == NULL) {                             // si c'est la racine, la nouvelle racine devient le fils gauche
                abr = noeud-> filsGauche;
@@ -350,10 +350,10 @@ T_Arbre supprimerNoeud(T_Arbre abr, T_Noeud* noeudPere, T_Noeud* noeud) {
                freeNoeud(noeud);
                return abr;
             }
-                
+
             if (noeud == noeudPere->filsGauche) {
                 noeudPere->filsGauche = noeud->filsDroit;
-            } 
+            }
             else {
                 noeudPere->filsDroit = noeud->filsDroit;
             }
@@ -365,19 +365,19 @@ T_Arbre supprimerNoeud(T_Arbre abr, T_Noeud* noeudPere, T_Noeud* noeud) {
                 } else {
                     succ = pereSucc->filsGauche;
                 }
-                
+
                 //on change les valeurs du neoud a celles de son successeur
                 noeud->listeInscriptions = succ->listeInscriptions;
                 noeud ->nom = succ->nom;
                 noeud ->prenom = succ->prenom;
                 // on supprime le successeur
-                abr = supprimerNoeud(abr, pereSucc, succ);              
+                abr = supprimerNoeud(abr, pereSucc, succ);
             }
         }
     }
     freeNoeud(noeud);
     return abr;
-} 
+}
 
 
 // FONCTIONS POUR MENU
@@ -400,21 +400,21 @@ T_Arbre inscrireEtuUV(T_Arbre abr) {   //Inscrire un étudiant à une UV
         viderBuffer();
         printf("\n Mavaise saisie veuillez réssayer: ");
         read = scanf("%s", &nom);
-    } 
+    }
     printf("\nPRENOM: ");
     read = scanf("%s", &prenom);
     while (read == 0) {
         viderBuffer();
         printf("\n Mavaise saisie veuillez réssayer: ");
         read = scanf("%s", &prenom);
-    } 
+    }
     printf("\nCODE UV: ");
     read = scanf("%s", &codeUV);
     while (read == 0) {
         viderBuffer();
         printf("\n Mavaise saisie veuillez réssayer: ");
         read = scanf("%s", &codeUV);
-    } 
+    }
 
     upperCase(nom);
     upperCase(prenom);
@@ -435,7 +435,7 @@ T_Arbre faireChargerFichier(T_Arbre abr) {
         viderBuffer();
         printf("\n Mavaise saisie veuillez réssayer: ");
         read = scanf("%s", &nomFichier);
-    } 
+    }
     new_abr = chargerFichier(abr, nomFichier);
     if (new_abr == NULL) {
         printf("\nLe fichier n'a pas pu ètre chargé");
@@ -454,7 +454,7 @@ void faireAfficherInscriptionsUV(T_Arbre abr) {
         viderBuffer();
         printf("\n Mavaise saisie veuillez réssayer: ");
         read = scanf("%s", &codeUV);
-    } 
+    }
     upperCase(codeUV);
     afficherInscriptionsUV(abr,codeUV);
 
@@ -471,26 +471,26 @@ T_Arbre faireSuppInscription(T_Arbre abr) {
         viderBuffer();
         printf("\n Mavaise saisie veuillez réssayer: ");
         read = scanf("%s", &nom);
-    } 
+    }
     printf("\nPRENOM: ");
     read = scanf("%s", &prenom);
     while (read == 0) {
         viderBuffer();
         printf("\n Mavaise saisie veuillez réssayer: ");
         read = scanf("%[^\n]s", &prenom);
-    } 
+    }
     printf("\nCODE UV: ");
     read = scanf("%s", &codeUV);
     while (read == 0) {
         viderBuffer();
         printf("\n Mavaise saisie veuillez réssayer: ");
         read = scanf("%s", &codeUV);
-    } 
+    }
 
     upperCase(nom);
     upperCase(prenom);
     upperCase(codeUV);
-     
+
     abr = supprimerInscription(abr, nom, prenom, codeUV);
 
     return abr;
