@@ -29,7 +29,7 @@ typedef T_Noeud* T_Arbre;
 
  T_Arbre supprimerInscription(T_Arbre abr, char* nom, char* prenom, char* code);
 
- //fonction extra
+ //fonctions extra
  char* removeSpace(char* str);
  int compareNoeud(T_Noeud* n1,char* nom, char* prenom);
  void upperCase(char* str);
@@ -39,6 +39,12 @@ typedef T_Noeud* T_Arbre;
  T_Arbre supprimerNoeud(T_Arbre abr, T_Noeud* noeudPere, T_Noeud* noeud);
  T_Element* supprimerUV(T_Element* liste, char* code);
  
+
+ void viderBuffer();
+ T_Arbre inscrireEtuUV(T_Arbre abr);
+ T_Arbre faireChargerFichier(T_Arbre abr);
+ T_Arbre faireSuppInscritpion(T_Arbre abr);
+ void freeNoeud(T_Noeud* noeud);
 
 
 #endif // TP4_H_INCLUDED
